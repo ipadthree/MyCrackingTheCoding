@@ -1,0 +1,84 @@
+//
+//  main.cpp
+//  crack
+//
+//  Created by liangAlbert on 5/9/15.
+//  Copyright (c) 2015 JayLiang. All rights reserved.
+//
+
+#include <iostream>
+#include <string>
+using namespace std;
+struct linklist{
+    int value;
+    linklist *next;
+};
+
+void findnthtolast(linklist *head, int n){
+    if (head == NULL) {
+        return;
+    }
+    linklist *forloop = head, *outnode = head;
+    for (int i = 0 ; i < n-1; i++) {
+        forloop = forloop->next;
+        if (forloop == NULL) {
+            return;
+        }
+    }
+    while (forloop->next != NULL) {
+        forloop = forloop->next;
+        outnode = outnode->next;
+    }
+    if (forloop->next == NULL) {
+        cout<<n<<"th to last address: "<<outnode<<endl
+        <<"value:"<<outnode->value<<endl;
+    }
+    
+    
+//    int size = 0;
+//    while (forloop != NULL) {
+//        size++;
+//        forloop = forloop->next;
+//    }
+//    if (n>size) {
+//        return;
+//    }
+//    int count = size-n;
+//    for(int i = 0; i < count; i++){
+//        outnode = outnode->next;
+//    }
+//    cout<<n<<"th to last address: "<<outnode<<endl
+//    <<"value:"<<outnode->value<<endl;
+    
+}
+
+int main(int argc, const char * argv[]) {
+    // insert code here..
+    linklist head, second, third, fourth, fifth, sixth, tail;
+    head.next = &second;
+    second.next = &third;
+    third.next = &fourth;
+    fourth.next = &fifth;
+    fifth.next = &sixth;
+    sixth.next = &tail;
+    tail.next = NULL;
+    
+    head.value = 1;
+    second.value = 2;
+    third.value = 3;
+    fourth.value = 4;
+    fifth.value = 5;
+    sixth.value = 6;
+    tail.value = 7;
+    
+    findnthtolast(&head, 3);
+    
+    linklist *show = &head;
+    while (show != NULL) {
+        cout<<show->value<<"   ";
+        show = show->next;
+    }
+    
+
+    return 0;
+}
