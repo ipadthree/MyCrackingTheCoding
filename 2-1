@@ -22,8 +22,24 @@ void deletedup(linklist *head){
     if (head == NULL) {
         return;
     }
-    linklist *previous = head, *current = head->next, *runner;
-    while (current != NULL) {
+    linklist *forloop = head, *forcheck;
+    while (forloop->next != NULL) {
+        forcheck = head;
+        while (forcheck != forloop->next) {
+            if (forcheck->value == forloop->next->value) {
+                forloop->next = forloop->next->next;
+                break;
+            }
+            forcheck = forcheck->next;
+        }
+        if (forcheck == forloop->next) {
+            forloop = forloop->next;
+        }
+    }
+    
+    
+    
+ /*   while (current != NULL) {
         runner = head;
         while (runner != current ) {
             if (runner->value == current->value) {
@@ -37,8 +53,9 @@ void deletedup(linklist *head){
             current = current->next;
             previous = previous->next;
         }
-    }
+    }*/
 }
+
 int main(int argc, const char * argv[]) {
     // insert code here..
     linklist head, second, third, fourth, fifth, sixth, tail;
