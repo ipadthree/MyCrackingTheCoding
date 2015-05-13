@@ -1,0 +1,33 @@
+//
+//  main.cpp
+//  crack
+//
+//  Created by liangAlbert on 5/9/15.
+//  Copyright (c) 2015 JayLiang. All rights reserved.
+//
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main(int argc, const char * argv[]) {
+    // insert code here...
+    string str1, str2;
+    cout<<"type in string"<<endl;
+    getline(cin, str1);
+    cout<<"type in another string"<<endl;
+    getline(cin,str2);
+    if (str1.size() != str2.size()) {
+        cout<<"not anagrams";
+    }
+    for (int i = 0; i < str1.size(); i++) {
+        if (str1[i] == str2[str2.size()-1-i]) {
+
+        }else{
+            cout<<"not anagrams"<<endl;
+            return 0;
+        }
+    }
+    cout<<"The strings are anagrams";
+    return 0;
+}
