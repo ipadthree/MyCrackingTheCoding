@@ -1,0 +1,31 @@
+//
+//  main.cpp
+//  crack
+//
+//  Created by liangAlbert on 5/9/15.
+//  Copyright (c) 2015 JayLiang. All rights reserved.
+//
+
+#include <iostream>
+
+int main(int argc, const char * argv[]) {
+    // insert code here...
+    std::cout << "type in a string\n";
+    int hashArray[26] = {0};
+    char sArray[256];
+    scanf("%s", sArray);
+    char *Pstring = sArray;
+    for (int i = 0; i < sizeof(sArray); i++) {
+        if (*(Pstring + i)-97 >= 0 && *(Pstring + i)-97 <= 25) {
+            if (hashArray[*(Pstring + i)-97] == 0) {
+                hashArray[*(Pstring + i)-97] = 1;
+            }
+            else{
+                std::cout<<"There are duplicated characters"<<std::endl;
+                return 0;
+            }
+        }
+    }
+    std::cout<<"There are no duplicated characters"<<std::endl;
+    return 0;
+}
