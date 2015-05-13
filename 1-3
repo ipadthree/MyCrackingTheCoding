@@ -1,0 +1,35 @@
+//
+//  main.cpp
+//  crack
+//
+//  Created by liangAlbert on 5/9/15.
+//  Copyright (c) 2015 JayLiang. All rights reserved.
+//
+
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+int main(int argc, const char * argv[]) {
+    // insert code here...
+    char sarray[128];
+    int replace = 0;
+    std::cout << "type in a string\n";
+    cin>>sarray;
+    int size = strlen(sarray);
+    for (int i = 0; i < size; i++) {
+        for (int j = 0 ; j<i; j++) {
+            if (sarray[i] == sarray[j]) {
+                replace--;
+                break;
+            }else{
+                sarray[replace] = sarray[i];
+            }
+        }
+        replace++;
+    }
+    sarray[replace] = '\0';
+    cout<<"result"<<endl
+    <<sarray;
+    return 0;
+}
