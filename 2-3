@@ -1,0 +1,15 @@
+#include <iostream>
+#include <string>
+using namespace std;
+struct linklist{
+    int value;
+    linklist *next;
+};
+
+void deletemiddle(linklist *node){
+    if (node == NULL || node->next == NULL) {
+        return;
+    }
+    node->value = node->next->value;
+    node->next = node->next->next;
+}
