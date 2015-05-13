@@ -1,2 +1,2 @@
 # MyCrackingTheCoding
-My answer to the problems on Cracking the coding interview.
+My answers to the problems on Cracking the coding interview.
