@@ -1,0 +1,71 @@
+//
+//  main.cpp
+//  crack
+//
+//  Created by liangAlbert on 5/9/15.
+//  Copyright (c) 2015 JayLiang. All rights reserved.
+//
+
+#include <iostream>
+#include <string>
+using namespace std;
+struct linklist{
+    int value;
+    linklist *next;
+};
+
+
+    
+
+
+void deletedup(linklist *head){
+    if (head == NULL) {
+        return;
+    }
+    linklist *previous = head, *current = head->next, *runner;
+    while (current != NULL) {
+        runner = head;
+        while (runner != current ) {
+            if (runner->value == current->value) {
+                current = current->next;
+                previous->next = current;
+                break;
+            }
+                runner = runner->next;
+        }
+        if (runner == current) {  //this is where I got stuck.
+            current = current->next;
+            previous = previous->next;
+        }
+    }
+}
+int main(int argc, const char * argv[]) {
+    // insert code here..
+    linklist head, second, third, fourth, fifth, sixth, tail;
+    head.next = &second;
+    second.next = &third;
+    third.next = &fourth;
+    fourth.next = &fifth;
+    fifth.next = &sixth;
+    sixth.next = &tail;
+    tail.next = NULL;
+    
+    head.value = 1;
+    second.value = 1;
+    third.value = 1;
+    fourth.value = 2;
+    fifth.value = 3;
+    sixth.value = 3;
+    tail.value = 3;
+    
+    deletedup(&head);
+    
+    linklist *show = &head;
+    while (show != NULL) {
+        cout<<show->value<<"   ";
+        show = show->next;
+    }
+    
+
+    return 0;
+}
