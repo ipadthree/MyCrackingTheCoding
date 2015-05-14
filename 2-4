@@ -1,0 +1,92 @@
+//
+//  main.cpp
+//  crack
+//
+//  Created by liangAlbert on 5/9/15.
+//  Copyright (c) 2015 JayLiang. All rights reserved.
+//
+
+#include <iostream>
+#include <string>
+using namespace std;
+struct linklist{
+    int value;
+    linklist *next;
+};
+
+void reverseadd(linklist *head1, linklist *head2, linklist *forfinal){
+    linklist *forloop1 = head1, *forloop2 = head2;
+    int temp = 0;
+    while (forloop1 != NULL || forloop2 != NULL) {
+        if (forloop1 != NULL && forloop2 != NULL) {
+            forfinal->value = (forloop1->value + forloop2->value + temp) % 10;
+            temp = (forloop1->value + forloop2->value + temp) / 10;
+            forloop2 = forloop2->next;
+            forloop1 = forloop1->next;
+            forfinal = forfinal->next;
+        }else if (forloop1 != NULL && forloop2 == NULL){
+            forfinal->value = (forloop1->value + temp) % 10;
+            temp = (forloop1->value + temp) / 10;
+            forloop1 = forloop1->next;
+            forfinal = forfinal->next;
+        }else if (forloop1 == NULL && forloop2 != NULL){
+            forfinal->value = (forloop2->value + temp) % 10;
+            temp = (forloop2->value + temp) / 10;
+            forloop2 = forloop2->next;
+            forfinal = forfinal->next;
+        }
+
+    }
+    if(temp != 0 ){
+        forfinal->value = temp;
+    }
+}
+
+int main(int argc, const char * argv[]) {
+    // insert code here..
+    linklist head, second, third, fourth, fifth, sixth, tail;
+    head.next = &second;
+    second.next = &third;
+    third.next = &fourth;
+    fourth.next = &fifth;
+    fifth.next = &sixth;
+    sixth.next = &tail;
+    tail.next = NULL;
+    
+    head.value = 0;
+    second.value = 0;
+    third.value = 0;
+    fourth.value = 0;
+    fifth.value = 0;
+    sixth.value = 0;
+    tail.value = 0;
+    
+    linklist test1,test2,test3,test4;
+    test1.next = &test2;
+    test2.next = &test3;
+    test3.next = &test4;
+    test4.next = NULL;
+    test1.value = 7;
+    test2.value = 9;
+    test3.value = 3;
+    test4.value = 5;
+    
+    linklist t1,t2,t3;
+    t1.next = &t2;
+    t2.next = &t3;
+    t3.next = NULL;
+    t1.value = 7;
+    t2.value = 0;
+    t3.value = 3;
+    
+    reverseadd(&t1,&test1,&head);
+    
+    linklist *show = &head;
+    while (show != NULL) {
+        cout<<show->value<<"   ";
+        show = show->next;
+    }
+    
+
+    return 0;
+}
