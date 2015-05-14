@@ -1,0 +1,55 @@
+//
+//  main.cpp
+//  crack
+//
+//  Created by liangAlbert on 5/9/15.
+//  Copyright (c) 2015 JayLiang. All rights reserved.
+//
+
+#include <iostream>
+#include <string>
+using namespace std;
+struct linklist{
+    int value;
+    linklist *next;
+    int check = 0;
+};
+
+linklist *circulerlist(linklist *head){
+    if (head == NULL) {
+        return NULL;
+    }
+    linklist *forcheck = head;
+    while (forcheck->check != 1) {
+        forcheck->check = 1;
+        forcheck = forcheck->next;
+    }
+        return forcheck;
+}
+
+int main(int argc, const char * argv[]) {
+    // insert code here..
+    linklist head, second, third, fourth, fifth, sixth, tail;
+    head.next = &second;
+    second.next = &third;
+    third.next = &fourth;
+    fourth.next = &fifth;
+    fifth.next = &sixth;
+    sixth.next = &tail;
+    tail.next = &head;
+    
+    head.value = 1;
+    second.value = 2;
+    third.value = 3;
+    fourth.value = 4;
+    fifth.value = 5;
+    sixth.value = 6;
+    tail.value = 7;
+    
+    
+    cout<<"return output: "<<circulerlist(&head)->value;
+
+    
+
+    return 0;
+}
