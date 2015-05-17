@@ -1,0 +1,86 @@
+//
+//  main.cpp
+//  crack
+//
+//  Created by liangAlbert on 5/9/15.
+//  Copyright (c) 2015 JayLiang. All rights reserved.
+//
+
+#include <iostream>
+#include <string>
+using namespace std;
+const int arrsize = 30;
+int stackArray[arrsize] = {0};
+
+class stack{
+public:
+    int pop();
+    void add(int value);
+    stack(int *bottom, int *top){
+        this->bottom = bottom;
+        this->top = top;
+        ptop = this->bottom;
+    }
+    void show()const{
+        
+        for (int i = 0; i <= top - bottom; i++) {
+            cout<<*(bottom +i )<<"  ";
+        }
+        cout<<endl;
+    }
+private:
+    int *bottom = NULL;
+    int *top = NULL;
+    int *ptop = NULL;
+};
+int stack::pop(){
+    ptop--;
+    if (ptop < bottom) {
+        cout<<"cannot pop\n";
+        return NULL;
+    }
+    int *temp = ptop;
+    return *temp;
+}
+
+void stack::add(int value){
+    if (ptop > top) {
+        cout<<"cannot add"<<endl;
+    }
+    *ptop = value;
+    ptop++;
+}
+
+int main(int argc, const char * argv[]) {
+    // insert code here..
+    stack stack1(stackArray, &stackArray[9]);
+    stack stack2(&stackArray[10], &stackArray[19]);
+    stack stack3(&stackArray[20], &stackArray[29]);
+    
+    stack1.add(1);
+    stack1.add(11);
+    stack1.add(111);
+    
+    stack1.add(1);
+    stack1.add(11);
+    stack1.add(111);
+    
+    stack1.add(1);
+    stack1.add(11);
+    stack1.add(111);
+    stack1.add(1);
+    cout<<"tanchu "<<stack1.pop()<<endl;
+    cout<<"tanchu "<<stack1.pop()<<endl;
+    stack1.add(78);
+    
+    stack2.add(22);
+    stack3.add(33);
+    cout<<"output"<<stack3.pop()<<endl;
+    cout<<"output"<<stack3.pop()<<endl;
+    stack1.show();
+    stack2.show();
+    stack3.show();
+    
+
+    return 0;
+}
