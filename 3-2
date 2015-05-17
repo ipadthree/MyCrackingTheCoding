@@ -1,0 +1,100 @@
+//
+//  main.cpp
+//  crack
+//
+//  Created by liangAlbert on 5/9/15.
+//  Copyright (c) 2015 JayLiang. All rights reserved.
+//
+
+#include <iostream>
+#include <string>
+#include <limits.h>
+
+using namespace std;
+struct stackNode{
+    int value;
+    stackNode *next;
+    stackNode *prev;
+    int tempMin;
+};
+
+
+class stack{
+public:
+    void add(int value);
+    int pop();
+    int min();
+private:
+    stackNode *ptr = NULL;
+    int stackMin = INT_MAX;
+};
+
+void stack::add(int value){
+    stackNode *newNode = new stackNode;
+    if (ptr == NULL) {
+        ptr = newNode;
+        ptr->prev = NULL;
+        ptr->tempMin = value;
+    }else{
+        ptr->next = newNode;
+        newNode->prev = ptr;
+        ptr = ptr->next;
+        ptr->next = NULL;
+        
+        ptr->value = value;
+        
+        if (value < stackMin) {
+            stackMin = value;
+        }
+        ptr->tempMin = stackMin;
+    }
+    
+}
+
+int stack::pop(){
+    if (ptr == NULL) {
+        cout<<"\nstack is already empty\n";
+        return NULL;
+    }
+    int temp = ptr->value;
+    if (ptr->prev == NULL) {
+        delete ptr;
+        ptr = NULL;
+        return NULL;
+    }
+    ptr = ptr->prev;
+    delete ptr->next;
+    ptr->next = NULL;
+    return temp;
+}
+
+int stack::min(){
+    if (ptr == NULL) {
+        cout<<"none left"<<endl;
+        return NULL;
+    }
+    return ptr->tempMin;
+}
+
+int main(int argc, const char * argv[]) {
+    // insert code here..
+    stack stack1;
+    stack1.add(5);
+    stack1.add(3);
+    stack1.add(1);
+    stack1.add(7);
+    cout<<stack1.min()<<endl;
+    stack1.pop();
+    cout<<stack1.min()<<endl;
+    stack1.pop();
+    cout<<stack1.min()<<endl;
+    stack1.pop();
+    cout<<stack1.min()<<endl;
+    stack1.pop();
+    cout<<stack1.min()<<endl;
+    stack1.pop();
+
+    
+    
+    return 0;
+}
