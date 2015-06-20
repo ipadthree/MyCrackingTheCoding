@@ -1,0 +1,42 @@
+vector<list<Node*> > find_level_linklists(Node *head){
+    vector<list<Node*>> collectList;
+    list<Node*> line;
+    line.push_back(head);
+    collectList.push_back(line);
+    int level = 0;
+//    Node *n = new Node;
+//    line.push_back(n);
+    while (!collectList[level].empty()) {
+        list<Node*> newLine;
+        list<Node*>::iterator it;
+        for (it = collectList[level].begin(); it != collectList[level].end(); it++) {
+            Node *itt = *it;
+            if (itt->lchild != NULL) {
+                newLine.push_back(itt->lchild);
+            }
+            if (itt->rchild != NULL) {
+                newLine.push_back(itt->rchild);
+            }
+        }
+        level++;
+        collectList.push_back(newLine);
+    }
+    return collectList;
+//    vector<list<Node*> > res;
+//    int level = 0;
+//    list<Node*> li;
+//    li.push_back(head);
+//    res.push_back(li);
+//    while(!res[level].empty()){
+//        list<Node*> l;
+//        list<Node*>::iterator it;
+//        for(it=res[level].begin(); it!=res[level].end(); ++it){
+//            Node *n = *it;
+//            if(n->lchild) l.push_back(n->lchild);
+//            if(n->rchild) l.push_back(n->rchild);
+//        }
+//        ++level;
+//        res.push_back(l);
+//    }
+//    return res;
+}
