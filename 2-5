@@ -53,3 +53,29 @@ int main(int argc, const char * argv[]) {
 
     return 0;
 }
+
+
+
+version 2.0
+
+typedef struct ListNode {
+        int val;
+      ListNode *next;
+        ListNode(int x) : val(x), next(NULL) {}
+    }Node;
+
+Node *loop(Node *head){
+    Node *start = head;
+    map<Node*, int> storage;
+    map<Node*, int>::iterator it;
+    while (start) {
+        it = storage.find(start);
+        if (it == storage.end()) {
+            storage[start] = 1;
+            start = start->next;
+        }else{
+            break;
+        }
+    }
+    return start;
+}
