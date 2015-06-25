@@ -90,3 +90,92 @@ int main(int argc, const char * argv[]) {
 
     return 0;
 }
+
+
+
+
+
+
+
+2.0 version
+
+
+typedef struct ListNode {
+        int val;
+      ListNode *next;
+        ListNode(int x) : val(x), next(NULL) {}
+    }Node;
+
+Node *addup(Node *n1, Node *n2){
+    if (!n1) {
+        return n2;
+    }
+    if (!n2) {
+        return n1;
+    }
+    int jinwei = 0;
+    Node *t1 = n1;
+    Node *t2 = n2;
+    Node *start = new Node(0);
+    Node *result = start;
+    while (t1 != NULL && t2 != NULL) {
+        Node *sNext = new Node(0);
+        start->next = sNext;
+        int real = t1->val + t2->val + jinwei;
+        if (real >= 10) {
+            real = real - 10;
+            jinwei = 1;
+        }else{
+            jinwei = 0;
+        }
+        start->val = real;
+        t1 = t1->next;
+        t2 = t2->next;
+        start = start->next;
+    }
+    while (t1) {
+        Node *sNext = new Node(0);
+        start->next = sNext;
+        int real = t1->val + jinwei;
+        if (real >= 10) {
+            real = real - 10;
+            jinwei = 1;
+        }else{
+            jinwei = 0;
+        }
+        start->val = real;
+        t1 = t1->next;
+        start = start->next;
+    }
+    while (t2) {
+        Node *sNext = new Node(0);
+        start->next = sNext;
+        int real = t2->val + jinwei;
+        if (real >= 10) {
+            real = real - 10;
+            jinwei = 1;
+        }else{
+            jinwei = 0;
+        }
+        start->val = real;
+        t2 = t2->next;
+        start = start->next;
+    }
+    if (jinwei == 1) {
+        start->val = 1;
+    }else{
+        start = NULL;
+    }
+    return result;
+}
+
+void print(Node *head){
+    while (head) {
+        cout<<head->val<<"  ";
+        head = head->next;
+    }
+    cout<<endl;
+}
+
+
+
