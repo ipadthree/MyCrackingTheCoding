@@ -98,3 +98,104 @@ int main(int argc, const char * argv[]) {
     
     return 0;
 }
+
+
+
+
+//version 2.0
+
+typedef struct node{
+    int value;
+    node *next;
+}node;
+
+class Mystack{
+    node *top = NULL;
+public:
+    void push(int a){
+        node *newnode = new node;
+        newnode->value = a;
+        newnode->next = top;
+        top = newnode;
+    }
+    node *pop(){
+        if (top == NULL) {
+            return NULL;
+        }
+        node *returnnode = top;
+        top = top->next;
+        return returnnode;
+    }
+    int topvalue(){
+        if (top != NULL) {
+            return top->value;
+        }
+        return NULL;
+    }
+};
+
+class Myaddstack{
+    node *top = NULL;
+    Mystack min;
+public:
+    void push(int a){
+        node *newnode = new node;
+        newnode->value = a;
+        newnode->next = top;
+        if (top == NULL) {
+            min.push(a);
+        }else{
+            if (a <= min.topvalue()) {
+                min.push(a);
+            }
+        }
+        top = newnode;
+    }
+    node *pop(){
+        if (top == NULL) {
+            return NULL;
+        }
+        node *returnnode = top;
+        top = top->next;
+        if (returnnode->value == min.topvalue()) {
+            min.pop();
+        }
+        return returnnode;
+    }
+    void minvalue(){
+        cout<<min.topvalue()<<endl;
+    }
+};
+
+int main(){
+
+    Myaddstack st;
+    st.push(4);
+    st.push(2);
+    st.push(6);
+    st.push(1);
+    st.push(5);
+    st.push(1);
+    st.push(7);
+    
+    st.minvalue();
+    st.pop();
+    st.minvalue();
+    st.pop();
+    st.minvalue();
+    st.pop();
+    st.pop();
+    st.minvalue();
+    st.pop();
+    st.minvalue();st.pop();
+    st.minvalue();
+    st.pop();
+    st.minvalue();
+    
+
+
+    
+    
+    return 0;
+}
+
