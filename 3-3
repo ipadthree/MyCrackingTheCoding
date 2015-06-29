@@ -1,0 +1,63 @@
+class Mystack{
+    node *top = NULL;
+public:
+    void push(int a){
+        node *newnode = new node;
+        newnode->value = a;
+        newnode->next = top;
+        top = newnode;
+    }
+    node *pop(){
+        if (top == NULL) {
+            return NULL;
+        }
+        node *returnnode = top;
+        top = top->next;
+        return returnnode;
+    }
+    int topvalue(){
+        if (top != NULL) {
+            return top->value;
+        }
+        return NULL;
+    }
+};
+
+class Myinstack{
+public:
+    Mystack stack;
+    Myinstack *nextstack;
+};
+
+class plates{
+    Myinstack first;
+    Myinstack *now = &first;
+    int limit = 3;
+    int count = 0;
+public:
+    void push(int a){
+        if (count >= limit) {
+            Myinstack *newinstack = new Myinstack;
+            newinstack->nextstack = now;
+            now = newinstack;
+            count = 0;
+        }
+        now->stack.push(a);
+        count++;
+    }
+    node *pop(){
+        if (count == 0) {
+            if (now == &first) {}
+            else{
+                now = now->nextstack;
+            }
+            count = 3;
+        }
+        node *returnnode = now->stack.pop();
+        count--;
+        return returnnode;
+    }
+    void showtop(){
+        cout<<now->stack.topvalue()<<endl;
+    }
+};
